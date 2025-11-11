@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliking Planet LDA - Under Construction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            background-color: #FFFDF9; 
+            color: #333; 
+            line-height: 1.6; 
+        }
+        .hero { 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://q-xx.bstatic.com/xdata/images/hotel/max500/719910916.jpg?k=4770c71b2e08a4a16c1aea2aaaf031062c9985164b46e44427a3b2c56316bdb6&o='); 
+            background-size: cover; 
+            background-position: center; 
+            padding: 150px 0; 
+            color: white; 
+            text-align: center; 
+        }
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 4em; 
+            margin-bottom: 10px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .logo { 
+            max-width: 250px; 
+            margin-bottom: 20px; 
+        }
+        nav { 
+            background-color: #6B8E23; 
+            padding: 15px 0; 
+        }
+        nav a { 
+            color: white; 
+            font-weight: 600; 
+            transition: color 0.3s; 
+            text-decoration: none;
+        }
+        nav a:hover { 
+            color: #FFFDF9; 
+        }
+        section { 
+            padding: 60px 0; 
+            opacity: 0; 
+            animation: fadeIn 1s forwards; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .lang-section { 
+            display: none; 
+        }
+        .active { 
+            display: block; 
+        }
+        .card { 
+            border: none; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            border-radius: 10px; 
+            overflow: hidden; 
+            background-color: #FDFAF6; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        .bio img { 
+            border-radius: 10px; 
+            transition: transform 0.3s ease; 
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .bio img:hover { 
+            transform: scale(1.05); 
+        }
+        h2, h3, h4, h5 { 
+            font-family: 'Playfair Display', serif; 
+            color: #4B5320; 
+        }
+        .gallery img { 
+            border-radius: 10px; 
+            transition: transform 0.3s ease; 
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .gallery img:hover { 
+            transform: scale(1.05); 
+        }
+        .map-container { 
+            margin-top: 30px; 
+        }
+        footer { 
+            background-color: #4B5320; 
+            color: white; 
+            padding: 30px 0; 
+            margin-top: 50px;
+        }
+        .btn-primary { 
+            background-color: #6B8E23; 
+            border-color: #6B8E23; 
+        }
+        .btn-primary:hover { 
+            background-color: #556B2F; 
+            border-color: #556B2F; 
+        }
+        .under-construction { 
+            background: linear-gradient(135deg, #e6f4e6, #c8e6c9); 
+            padding: 60px 0; 
+            text-align: center; 
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+        .under-construction .icon { 
+            position: relative; 
+            display: inline-block; 
+            font-size: 3em; 
+            color: #d4af37; 
+            margin-bottom: 20px; 
+        }
+        .under-construction .icon .bi-wrench { 
+            transform: rotate(-45deg); 
+            position: absolute; 
+            top: 0; 
+            left: -15px; 
+        }
+        .under-construction .icon .bi-screwdriver { 
+            transform: rotate(45deg); 
+            position: absolute; 
+            top: 0; 
+            left: 15px; 
+        }
+        .under-construction h2 { 
+            font-size: 2.5em; 
+            margin: 10px 0; 
+            color: #4B5320; 
+        }
+        .under-construction p { 
+            font-size: 1.2em; 
+            color: #4B5320; 
+            margin-bottom: 20px; 
+        }
+        .loading-dots { 
+            display: inline-block; 
+        }
+        .loading-dots span { 
+            display: inline-block; 
+            width: 12px; 
+            height: 12px; 
+            margin: 0 6px; 
+            background-color: #d4af37; 
+            border-radius: 50%; 
+            animation: bounce 1.2s infinite ease-in-out; 
+        }
+        .loading-dots span:nth-child(2) { 
+            animation-delay: 0.2s; 
+        }
+        .loading-dots span:nth-child(3) { 
+            animation-delay: 0.4s; 
+        }
+        @keyframes bounce { 
+            0%, 80%, 100% { transform: translateY(0); } 
+            40% { transform: translateY(-12px); } 
+        }
+        .business-card {
+            margin-bottom: 40px;
+        }
+        .business-card h4 a {
+            color: #4B5320;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .business-card h4 a:hover {
+            color: #6B8E23;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #4B5320;
+        }
+        .gallery {
+            margin: 20px 0;
+        }
+        .gallery .col-md-4 {
+            margin-bottom: 15px;
+        }
+        .bio .col-md-8 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bio h5 a {
+            color: #4B5320;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .bio h5 a:hover {
+            color: #6B8E23;
+        }
+        .email-link {
+            color: #6B8E23;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .email-link:hover {
+            color: #556B2F;
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function switchLanguage(lang) {
+            document.getElementById('en').classList.remove('active');
+            document.getElementById('pt').classList.remove('active');
+            document.getElementById(lang).classList.add('active');
+        }
+    </script>
+</head>
+<body onload="switchLanguage('en')">
+    <header class="hero">
+        <div class="container">
+            <img src="https://placehold.co/300x200?text=Cliking+Planet+LDA+Logo" alt="Cliking Planet LDA Logo" class="logo">
+            <h1>Cliking Planet LDA</h1>
+            <p>Registered in Portugal with number 516642537</p>
+        </div>
+    </header>
+    <nav class="text-center">
+        <a href="#" onclick="switchLanguage('en')" class="mx-3">English</a>
+        <a href="#" onclick="switchLanguage('pt')" class="mx-3">Português</a>
+    </nav>
+    <section id="en" class="lang-section active">
+        <div class="container">
+            <div class="under-construction">
+                <div class="icon">
+                    <i class="bi bi-wrench"></i>
+                    <i class="bi bi-screwdriver"></i>
+                </div>
+                <h2>Website Under Construction</h2>
+                <p>We're working hard to bring you an amazing experience</p>
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <p class="text-center lead">In the meantime, learn more about our businesses below.</p>
+            
+            <h3 class="mt-5">Our Businesses</h3>
+            
+            <div class="card business-card">
+                <div class="card-body">
+                    <h4><a href="https://share.google/lY0hRSUIfPeYT6LgG" target="_blank">Yoga Farm - B&B Yoga Retreat in Tavira</a></h4>
+                    <p>Yoga Farm is a simple yet comfortable yoga retreat immersed in authentic rustic nature. Guests can savor genuine flavors directly from our vegetable garden, which features 80 vegetables planted on organic principles, alongside 70 indigenous and tropical fruit trees. Located in Curral dos Boeiros, 7km from Tavira center, it offers a peaceful setting at the foothills of the mountain range with beautiful views, free WiFi, private parking, yoga classes, and more. It's an ongoing restoration of a traditional farmhouse, providing a relaxing environment where you feel at home.</p>
+                    <div class="row gallery">
+                        <div class="col-md-4"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/690796622.jpg?k=8775560c8aadd7693b2e3821da436c996658eb67a1a733884fb306fd23f3ac6e&o=" alt="Yoga Farm Bedroom" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/719910916.jpg?k=4770c71b2e08a4a16c1aea2aaaf031062c9985164b46e44427a3b2c56316bdb6&o=" alt="Yoga Farm Exterior" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/491493487.jpg?k=ea91d46cea3f21e249cf2152a2c40e4edfc1a0012a9b4ef4fbc7f82d231d9f6b&o=" alt="Yoga Session at Yoga Farm" class="img-fluid"></div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3175.322!2d-7.6264374!3d37.1785016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd10053e66b92095%3A0x655eb3d31fabd914!2sYoga%20Farm!5e0!3m2!1sen!2spt!4v1731400000000" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h4>Yoga Lessons by Internationally Renowned Masters</h4>
+                    <p>We offer yoga lessons taught by two internationally renowned masters: Mark Flint and Stephanie Yau.</p>
+                    
+                    <div class="row mb-4 bio">
+                        <div class="col-md-4">
+                            <img src="https://markflintyoga.org/wp-content/uploads/2021/03/yoga_big_img1.jpg" alt="Mark Flint" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h5><a href="https://markflintyoga.org/" target="_blank">Mark Flint</a></h5>
+                            <p>Mark Flint, a former professional golfer, overcame rheumatoid arthritis through yoga. He moved to India in 1999, practicing Ashtanga yoga under Sharath Jois, who authorized him to teach in 2012. Mark emphasizes breath, bandhas, and drishti, especially for beginners and those with health challenges. He teaches traditional Ashtanga, adapting for individual needs, and believes in the anti-aging benefits of the practice.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4 bio">
+                        <div class="col-md-4">
+                            <img src="https://markflintyoga.org/wp-content/uploads/2021/03/yoga_big_gallery2.jpg" alt="Stephanie Yau" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h5><a href="https://markflintyoga.org/stephanie-profile/" target="_blank">Stephanie Yau</a></h5>
+                            <p>Stephanie Yau Flint, from Hong Kong, transformed her life from frequent illnesses to balance through yoga. Since 2006, she has trained extensively in India, focusing on Ashtanga at the Sri K. Pattabhi Jois Institute. She practices Vipassana meditation and teaches with commitment, care, and precision, helping students find inner strength and calmness.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5">Contact Us</h4>
+                    <p>To get in touch, please send an email to: <a href="mailto:info@clickingplanet.fit" class="email-link">info@clickingplanet.fit</a></p>
+                    <p class="mt-3">Alternatively, you can fill out the form below:</p>
+                    <form action="mailto:info@clickingplanet.fit" method="post" enctype="text/plain">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pt" class="lang-section">
+        <div class="container">
+            <div class="under-construction">
+                <div class="icon">
+                    <i class="bi bi-wrench"></i>
+                    <i class="bi bi-screwdriver"></i>
+                </div>
+                <h2>Site em Construção</h2>
+                <p>Estamos a trabalhar arduamente para lhe trazer uma experiência incrível</p>
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <p class="text-center lead">Enquanto isso, aprenda mais sobre os nossos negócios abaixo.</p>
+            
+            <h3 class="mt-5">Os Nossos Negócios</h3>
+            
+            <div class="card business-card">
+                <div class="card-body">
+                    <h4><a href="https://maps.app.goo.gl/lY0hRSUIfPeYT6LgG" target="_blank">Yoga Farm - B&B Retiro de Ioga em Tavira</a></h4>
+                    <p>A Yoga Farm é um retiro de ioga simples mas confortável, imerso na autêntica natureza rústica. Os hóspedes podem saborear sabores genuínos diretamente do nosso jardim de vegetais, que conta com 80 vegetais plantados com princípios orgânicos, ao lado de 70 árvores de frutos indígenas e tropicais. Localizada em Curral dos Boeiros, a 7km do centro de Tavira, oferece um ambiente pacífico nas encostas da serra com vistas belas, WiFi gratuito, estacionamento privado, aulas de ioga e mais. É uma restauração em curso de uma casa de fazenda tradicional, proporcionando um ambiente relaxante onde se sente em casa.</p>
+                    <div class="row gallery">
+                        <div class="col-md-4"><img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/690796622.jpg?k=8775560c8aadd7693b2e3821da436c996658eb67a1a733884fb306fd23f3ac6e&o=" alt="Quarto na Yoga Farm" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/719910916.jpg?k=4770c71b2e08a4a16c1aea2aaaf031062c9985164b46e44427a3b2c56316bdb6&o=" alt="Exterior da Yoga Farm" class="img-fluid"></div>
+                        <div class="col-md-4"><img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/491493487.jpg?k=ea91d46cea3f21e249cf2152a2c40e4edfc1a0012a9b4ef4fbc7f82d231d9f6b&o=" alt="Sessão de Ioga na Yoga Farm" class="img-fluid"></div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3175.322!2d-7.6264374!3d37.1785016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd10053e66b92095%3A0x655eb3d31fabd914!2sYoga%20Farm!5e0!3m2!1sen!2spt!4v1731400000000" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h4>Aulas de Ioga por Mestres de Renome Internacional</h4>
+                    <p>Oferecemos aulas de ioga ensinadas por dois mestres de renome internacional: Mark Flint e Stephanie Yau.</p>
+                    
+                    <div class="row mb-4 bio">
+                        <div class="col-md-4">
+                            <img src="https://markflintyoga.org/wp-content/uploads/2021/03/yoga_big_img1.jpg" alt="Mark Flint" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h5><a href="https://markflintyoga.org/" target="_blank">Mark Flint</a></h5>
+                            <p>Mark Flint, um antigo golfista profissional, superou a artrite reumatoide através do ioga. Mudou-se para a Índia em 1999, praticando ioga Ashtanga sob Sharath Jois, que o autorizou a ensinar em 2012. Mark enfatiza a respiração, bandhas e drishti, especialmente para iniciantes e aqueles com desafios de saúde. Ensina Ashtanga tradicional, adaptando às necessidades individuais, e acredita nos benefícios anti-envelhecimento da prática.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4 bio">
+                        <div class="col-md-4">
+                            <img src="https://markflintyoga.org/wp-content/uploads/2021/03/yoga_big_gallery2.jpg" alt="Stephanie Yau" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h5><a href="https://markflintyoga.org/stephanie-profile/" target="_blank">Stephanie Yau</a></h5>
+                            <p>Stephanie Yau Flint, de Hong Kong, transformou a sua vida de doenças frequentes para equilíbrio através do ioga. Desde 2006, treinou extensivamente na Índia, focando em Ashtanga no Instituto Sri K. Pattabhi Jois. Pratica meditação Vipassana e ensina com compromisso, cuidado e precisão, ajudando os alunos a encontrar força interior e calma.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5">Contacte-nos</h4>
+                    <p>Para entrar em contacto, por favor envie um email para: <a href="mailto:info@clickingplanet.fit" class="email-link">info@clickingplanet.fit</a></p>
+                    <p class="mt-3">Ou preencha o formulário abaixo:</p>
+                    <form action="mailto:info@clickingplanet.fit" method="post" enctype="text/plain">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="O seu Nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="O seu Email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="A sua Mensagem"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-center">
+        <p>&copy; 2025 Cliking Planet LDA. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
